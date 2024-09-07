@@ -18,7 +18,7 @@ if($paginaUrl == "principal"){
     echo "ERRO 404, PÁGINA NÃO EXISTE!";
 }
 
-echo "testando"
+echo "testando";
 
 
 
