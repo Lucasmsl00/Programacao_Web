@@ -8,14 +8,17 @@
     <title>InfoSports</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menu_style.css">
-    <link rel="stylesheet" href="css/login.css">
+    <?php if($paginaUrl === 'login'): ?>
+        <link rel="stylesheet" href="css/login.css">
+    <?php endif
+    ?>
 </head>
 <body>
 <header>
-        <div><a href="<?= "http://localhost/programacao_web/?pagina=principal"?>" class="text_white">InfoSports</a></div>
+        <div><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=principal"?>" class="text_white">InfoSports</a></div>
         <nav>
-            <button><a href="<?= "http://localhost/programacao_web/?pagina=login"?>" class="a_menu">Login</a></button>
-            <button><a href="#" class="a_menu">Registro</a></button>
-            <button><a href="#" class="a_menu">Contato</a></button>
+            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=login"?>" class="a_menu">Login</a></button>
+            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=registro"?>" class="a_menu">Registro</a></button>
+            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=contato"?>" class="a_menu">Contato</a></button>
         </nav>
 </header>
