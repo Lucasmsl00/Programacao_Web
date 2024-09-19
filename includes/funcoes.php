@@ -177,3 +177,32 @@
         return substr($str,0,$quantidade)." [...]";
         }
     }
+
+    function calcularImc($peso, $altura){
+        $resposta = 0;
+        if ($peso && $altura){
+            $resposta = $peso / ($altura * $altura);
+        }
+        return round($resposta,2);
+    }
+
+    function verificarImc($resposta){
+        
+        if($resposta < 16){
+            return $resultado = "Magreza grave";
+        }elseif($resposta > 16  && $resposta < 16.9){
+            return $resultado = "Magreza moderada";
+        }elseif($resposta > 17  && $resposta < 18.5){
+            return $resultado = "Magreza leve";
+        }elseif($resposta > 18.6  && $resposta < 24.9){
+            return $resultado = "Peso Ideal";
+        }elseif($resposta > 25  && $resposta < 29.9){
+            return $resultado = "Sobrepeso";
+        }elseif($resposta > 30  && $resposta < 34.9){
+            return $resultado = "Obesidade I";
+        }elseif($resposta > 35  && $resposta < 39.9){
+            return $resultado = "Obesidade II";
+        }else{
+            return $resultado = "Obesidade mórbida";
+        }
+    }

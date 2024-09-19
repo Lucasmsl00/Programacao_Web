@@ -46,8 +46,8 @@ img{
 .div_grid{
     display: flex;
     flex-wrap: wrap;
-    flex: 0.2 1 auto;
-    max-width: 1000px;
+    max-width: 1400px;
+    align-items: center;
 }
 
 .mainContent{
@@ -111,3 +111,6 @@ img{
 }
 
 
+.left{
+    text-align: left;
+}

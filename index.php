@@ -1,6 +1,13 @@
 <?php
+$peso = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['peso'])) ? $_POST['peso'] : null;
+$altura = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['altura'])) ? $_POST['altura'] : null;
+$resposta = 0;
+
 include_once("includes/configuracao.php");
 include_once("includes/funcoes.php");
+$resposta = calcularImc($peso, $altura);
+$resultado = verificarImc($resposta);
+
 
 if($_GET && isset($_GET['pagina'])){
     $paginaUrl = $_GET['pagina'];

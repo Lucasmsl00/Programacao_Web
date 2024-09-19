@@ -28,16 +28,20 @@
         </div>
         
         <aside class="sidebarContent">
-            
-            <div class="imc">
-            <p>INDICE DE MASSA CORPORAL (IMC)</p>
-            <label for="#peso">Peso (KG)</label>
-            <input id="peso" type="text" placeholder="Digite o peso...">
-            <label for="#altura">Altura (M)</label>
-            <input id="altura" type="text" placeholder="Digite a altura...">
-            <button class="btnCalcular">Calcular</button>
+            <form action="#" method="POST">
+                <div class="imc">
+                    <p>INDICE DE MASSA CORPORAL (IMC)</p>
+                    <label for="#peso">Peso (KG)</label>
+                    <input id="peso" name="peso" type="text" placeholder="Digite o peso...">
+                    <label for="#altura">Altura (M)</label>
+                    <input id="altura" name="altura" type="text" placeholder="Digite a altura...">
+                    <button class="btnCalcular" type="submit">Calcular</button>
+                </div>
+            </form>
+            <div class="left">
+            Resultado: <?= $resposta?><br>
+            Você está com: <?= $resultado?>
             </div>
-            
         </aside>
     </section>
 
