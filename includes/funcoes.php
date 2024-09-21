@@ -178,31 +178,56 @@
         }
     }
 
-    function calcularImc($peso, $altura){
+    function calcularImc($peso, $altura, $nome, $email){
         $resposta = 0;
-        if ($peso && $altura){
+        if ($peso && $altura && $nome && $email){
             $resposta = $peso / ($altura * $altura);
         }
         return round($resposta,2);
     }
 
-    function verificarImc($resposta){
-        
-        if($resposta < 16){
+    function verificarInput($nome, $email, $peso, $altura, $imc, $classificacao){
+        if($nome && $email && $peso && $altura && $imc && $classificacao){
+            cadastrar($nome, $email, $peso, $altura, $imc, $classificacao);
+            return $confirmacao = "Cadastro feito com sucesso!";
+        }else{
+            return $confirmacao = "Erro!";
+        }
+    }
+
+    function classificarImc($imc){
+        if($imc <= 16){
             return $resultado = "Magreza grave";
-        }elseif($resposta > 16  && $resposta < 16.9){
+        }elseif($imc > 16  && $imc <= 16.9){
             return $resultado = "Magreza moderada";
-        }elseif($resposta > 17  && $resposta < 18.5){
+        }elseif($imc >= 17  && $imc <= 18.5){
             return $resultado = "Magreza leve";
-        }elseif($resposta > 18.6  && $resposta < 24.9){
+        }elseif($imc >= 18.6  && $imc <= 24.9){
             return $resultado = "Peso Ideal";
-        }elseif($resposta > 25  && $resposta < 29.9){
+        }elseif($imc >= 25  && $imc <= 29.9){
             return $resultado = "Sobrepeso";
-        }elseif($resposta > 30  && $resposta < 34.9){
+        }elseif($imc >= 30  && $imc <= 34.9){
             return $resultado = "Obesidade I";
-        }elseif($resposta > 35  && $resposta < 39.9){
+        }elseif($imc >= 35  && $imc <= 39.9){
             return $resultado = "Obesidade II";
         }else{
-            return $resultado = "Obesidade mórbida";
+            return $resultado = "Obesidade III ou mórbida";
         }
+    }
+
+    function cadastrar($nome, $email, $peso, $altura, $imc, $classificacao){
+        $sql = "INSERT INTO `imc` (`nome`,`email`,`peso`,`altura`,`imc`,`classificacao`) 
+        VALUES (:nome, :email, :peso, :altura, :imc, :classificacao)";
+
+        $pdo = Database::conexao();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':peso', $peso);
+        $stmt->bindParam(':altura', $altura);
+        $stmt->bindParam(':imc', $imc);
+        $stmt->bindParam(':classificacao', $classificacao);
+        $result = $stmt->execute();
+        return ($result)?true:false;
+
     }

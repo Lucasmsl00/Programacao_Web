@@ -31,17 +31,30 @@
             <form action="#" method="POST">
                 <div class="imc">
                     <p>INDICE DE MASSA CORPORAL (IMC)</p>
+                    <label for="#peso">Nome</label>
+                    <input id="nome" name="nome" type="text" placeholder="Digite seu nome..." required>
+                    <label for="#peso">E-mail</label>
+                    <input id="email" name="email" type="text" placeholder="Digite seu e-mail..." required>
                     <label for="#peso">Peso (KG)</label>
-                    <input id="peso" name="peso" type="text" placeholder="Digite o peso...">
+                    <input id="peso" name="peso" type="text" placeholder="Digite o peso..." required>
                     <label for="#altura">Altura (M)</label>
-                    <input id="altura" name="altura" type="text" placeholder="Digite a altura...">
-                    <button class="btnCalcular" type="submit">Calcular</button>
+                    <input id="altura" name="altura" type="text" placeholder="Digite a altura..." required>
+                    <button class="btnCalcular" type="submit" >Calcular</button>
                 </div>
             </form>
-            <div class="left">
-            Resultado: <?= $resposta?><br>
-            Você está com: <?= $resultado?>
-            </div>
+
+            <?php if ($imc):?>
+            <h4 class="left">
+                <?php
+                    if($nome && $email && $imc && $classificacao){
+                        echo "Resultado: $imc <br>";
+                        echo "Você está com:  $classificacao";
+                    }else{
+                        echo "Preencha todos os campos!";
+                    }
+                ?>
+            </h4>
+            <?php endif ?> 
         </aside>
     </section>
 
