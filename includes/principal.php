@@ -32,19 +32,19 @@
                 <div class="imc">
                     <p>INDICE DE MASSA CORPORAL (IMC)</p>
                     <label for="#peso">Nome</label>
-                    <input id="nome" name="nome" type="text" placeholder="Digite seu nome..." required>
+                    <input class="inputImc" id="nome" name="nome" type="text" placeholder="Digite seu nome..." required>
                     <label for="#peso">E-mail</label>
-                    <input id="email" name="email" type="text" placeholder="Digite seu e-mail..." required>
+                    <input class="inputImc" id="email" name="email" type="text" placeholder="Digite seu e-mail..." required>
                     <label for="#peso">Peso (KG)</label>
-                    <input id="peso" name="peso" type="text" placeholder="Digite o peso..." required>
+                    <input class="inputImc" id="peso" name="peso" type="text" placeholder="Digite o peso..." required>
                     <label for="#altura">Altura (M)</label>
-                    <input id="altura" name="altura" type="text" placeholder="Digite a altura..." required>
+                    <input class="inputImc" id="altura" name="altura" type="text" placeholder="Digite a altura..." required>
                     <button class="btnCalcular" type="submit" >Calcular</button>
                 </div>
             </form>
 
             <?php if ($imc):?>
-            <h4 class="left">
+            <h4>
                 <?php
                     if($nome && $email && $imc && $classificacao){
                         echo "Resultado: $imc <br>";

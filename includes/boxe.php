@@ -1,5 +1,7 @@
 <?php
-    include_once("includes/funcoes.php");
-    include_once("includes/cards.php");
+    include_once("header.php");
+    include_once("funcoes.php");
+
+    
 
 

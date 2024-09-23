@@ -15,10 +15,10 @@
 </head>
 <body>
 <header>
-        <div><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=principal"?>" class="text_white">InfoSports</a></div>
+        <div><a href="<?= constant('URL_LOCAL_SITE_PAGINA').'principal'?>" class="text_white">InfoSports</a></div>
         <nav>
-            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=login"?>" class="a_menu">Login</a></button>
-            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=registro"?>" class="a_menu">Registro</a></button>
-            <button><a href="<?= "http://localhost/Lucas_M/Programacao_Web/?pagina=contato"?>" class="a_menu">Contato</a></button>
+            <?php
+                include_once("menu.php")
+            ?>
         </nav>
 </header>

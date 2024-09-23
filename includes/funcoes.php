@@ -5,7 +5,7 @@
     function listarNoticias(){
 
         $listaNoticias[0] = array(
-            "link" => "boxe.php",
+            "link" => "includes/boxe.php",
             "titulo" => "BOXE", 
             "text" => "Descubra a força interior e a técnica impecável necessárias para se destacar no ringue. Desafie-se a superar seus limites físicos e mentais enquanto aprende os segredos deste esporte de combate emocionante.", 
             "img" => "imagens/boxe.jpg",

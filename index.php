@@ -38,7 +38,7 @@ if($paginaUrl === "principal"){
     include_once("includes/footer.php");
 }elseif($paginaUrl === "boxe"){
     include_once("includes/boxe.php");
-    include_once("footer.php");
+    include_once("includes/footer.php");
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";
 }
