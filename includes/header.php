@@ -8,10 +8,9 @@
     <title>InfoSports</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menu_style.css">
-    <?php if($paginaUrl === 'login'): ?>
-        <link rel="stylesheet" href="css/login.css">
-    <?php endif
-    ?>
+    <link rel="stylesheet" href="css/login.css">
+    
+    
 </head>
 <body>
 <header>

@@ -13,10 +13,6 @@ $classificacao = classificarImc($imc);
 $confirmacao = verificarInput($nome, $email, $peso, $altura, $imc, $classificacao);
 
 
-// if (($nome && $email && $peso && $altura) === null){
-
-// }
-
 if($_GET && isset($_GET['pagina'])){
     $paginaUrl = $_GET['pagina'];
 }else{

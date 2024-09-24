@@ -3,7 +3,7 @@
 
 switch ('localhost') {
     case 'localhost':
-        $enviroment['local'] = "localhost/";
+        $enviroment['local'] = "http://localhost/";
         break;
     case 'homol':
         $enviroment['homol'] = "https://meusite.com.br";

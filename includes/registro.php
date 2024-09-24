@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-</head>
-<body>
-    <h1>REGISTRE-SE</h1>
-</body>
-</html>
+<div class="conteiner">
+    <div class="bgWhite">
+        <form action="" method="POST">
+            <h4><strong>REGISTRE-SE</strong></h4>
+            <input class="inputImc" type="text" name="nome" placeholder="Nome" required>
+            <input class="inputImc" type="text" name="email" placeholder="E-mail" required>
+            <input class="inputImc" type="password" name="senha" placeholder="Senha" required>
+            <input class="inputImc" type="password" name="senha2" placeholder="Digite sua senha novamente" required>
+            <button class="btnCalcular" type="submit">Registrar</button>
+        </form>
+    </div>
+
+</div>

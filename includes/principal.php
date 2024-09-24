@@ -43,14 +43,12 @@
                 </div>
             </form>
 
-            <?php if ($imc):?>
+            <?php if($imc):?>
             <h4>
                 <?php
                     if($nome && $email && $imc && $classificacao){
                         echo "Resultado: $imc <br>";
                         echo "Você está com:  $classificacao";
-                    }else{
-                        echo "Preencha todos os campos!";
                     }
                 ?>
             </h4>
