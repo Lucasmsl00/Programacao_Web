@@ -57,7 +57,7 @@ nav{
     height: 70%;
 }
 
-form{
+.forms{
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -72,3 +72,15 @@ form{
     margin-bottom: 50px;
 }
 
+.formImc{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin: 0 auto;
+}
+
+.centralizaImc{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 <div class="conteiner">
     <div class="bgWhite">
-        <form action="" method="POST">
+        <form class="forms" action="" method="POST">
             <h4><strong>REGISTRE-SE</strong></h4>
             <input class="inputImc" type="text" name="nome" placeholder="Nome" required>
             <input class="inputImc" type="text" name="email" placeholder="E-mail" required>

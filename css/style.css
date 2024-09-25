@@ -13,6 +13,7 @@ header{
 }
 
 footer{
+    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -47,14 +48,17 @@ img{
     flex-wrap: wrap;
     max-width: 1400px;
     align-items: center;
+    justify-content: center;
 }
 
 .mainContent{
     display: flex;
     flex-wrap: wrap;
-    grid-area: "mainContent";
     row-gap: 40px;
     column-gap: 60px;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .item1{
@@ -83,6 +87,7 @@ img{
     display: block;
     width: 300px;
     height: 310px;
+    
 }
 
 .sidebarContent {
@@ -105,8 +110,7 @@ img{
     flex-direction: column;
     flex-wrap: wrap;
     margin: 30px;
-    row-gap: 15px;
-    grid-area: "sidebarContent mainContent";
+    row-gap: 22px;
 }
 
 .inputImc{

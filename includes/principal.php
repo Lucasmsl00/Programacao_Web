@@ -26,9 +26,8 @@
             
             </div>
         </div>
-        
         <aside class="sidebarContent">
-            <form action="#" method="POST">
+            <form class="formImc" action="#" method="POST">
                 <div class="imc">
                     <p>INDICE DE MASSA CORPORAL (IMC)</p>
                     <label for="#peso">Nome</label>
@@ -42,7 +41,6 @@
                     <button class="btnCalcular" type="submit" >Calcular</button>
                 </div>
             </form>
-
             <?php if($imc):?>
             <h4>
                 <?php
@@ -52,7 +50,8 @@
                     }
                 ?>
             </h4>
-            <?php endif ?> 
+            <?php endif ?>
         </aside>
+        
     </section>
 
