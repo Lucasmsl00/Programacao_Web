@@ -1,3 +1,7 @@
+<?php
+$email = $_REQUEST
+?>
+
 <div class="container">
     <div class="bgWhite">
         <form class="forms" action="#" method="post">
