@@ -135,3 +135,28 @@ img{
     align-items: center;
     
 }
+
+.input-text-area{
+    width: 95%;
+    height: 80px;
+    box-shadow: 2px 2px 2px rgb(196, 196, 196);
+    border: none;
+    border-radius: 5px;
+    background-color: #bed4f9;
+    padding: 6px;
+}
+
+.formContato{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 2px solid #054f77;
+    border-radius: 25px;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
