@@ -127,6 +127,7 @@
     function registrar($nome, $email, $telefone, $login, $senha){
 
         if( !$nome || !$email || !$telefone || !$login || !$senha){return;}
+        $senha = criptografia($senha);
         $sql = "INSERT INTO `registro` (`nome`, `email`, `telefone`, `login`, `senha`) VALUES (:nome, :email, :telefone, :login, :senha)";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
@@ -134,8 +135,7 @@
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':login', $login);
-        $senhaCriptografada = criptografia($senha);
-        $stmt->bindParam(':senha', $senhaCriptografada);
+        $stmt->bindParam(':senha', $senha);
         $result = $stmt->execute();
         return ($result)?true:false;
     }
