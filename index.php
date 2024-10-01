@@ -29,11 +29,16 @@ if($paginaUrl === "principal"){
 }elseif($paginaUrl === "contato"){
     include_once("includes/contato.php");
     include_once("includes/footer.php");
+    contatar($nome, $sobrenome, $email, $telefone, $mensagem);
 }elseif($paginaUrl === "registro"){
     include_once("includes/registro.php");
     include_once("includes/footer.php");
+    registrar($nome, $email, $telefone, $login, $senha);
 }elseif($paginaUrl === "boxe"){
     include_once("includes/boxe.php");
+    include_once("includes/footer.php");
+}elseif($paginaUrl === "noticia"){
+    include_once("includes/noticia.php");
     include_once("includes/footer.php");
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";

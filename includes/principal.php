@@ -10,14 +10,14 @@
             <div class="div_grid">
                 
                 <?php  
-                    foreach (listarNoticias() as $noticia):
+                    foreach (consultarNoticias() as $noticia):
                 ?>
 
                 <div class="item1">
-                    <a href= <?= $noticia["link"] ? $noticia["link"] : "";?>>
-                        <img src= <?= $noticia["img"] ? $noticia["img"] : ""; ?>>
+                    <a href= <?= $noticia["caminhoArquivo"] ? $noticia["caminhoArquivo"] : "";?>>
+                        <img src= <?= $noticia["caminhoImg"] ? $noticia["caminhoImg"] : ""; ?>>
                         <br><br><h4><?= $noticia["titulo"] ? $noticia["titulo"] : "";?></h4><br>
-                        <p> <?= reduzirStr(($noticia["text"]),150)?></p>
+                        <p> <?= reduzirStr(($noticia["descricaoCurta"]),150)?></p>
                     </a>
                 </div>
 

@@ -7,7 +7,7 @@ $mensagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['mensagem']))
 
 include_once("configuracao/conexao.php");
 include_once("funcoes.php");
-contatar($nome, $sobrenome, $email, $telefone, $mensagem);
+
 ?>
 
 
