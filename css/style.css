@@ -4,14 +4,6 @@
     padding: 0px;
 }
 
-header{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: #054f77;
-    padding: 30px;
-}
-
 footer{
     margin-top: 15px;
     display: flex;
