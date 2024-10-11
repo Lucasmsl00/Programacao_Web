@@ -8,10 +8,12 @@ $senha = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['senha'])) ? $_P
 include_once("configuracao/conexao.php");
 include_once("funcoes.php");
 
+$verificar_login = consultarLogin($login)
 ?>
 
 <div class="conteiner">
     <div class="bgWhite">
+        
         <form class="forms" action="#" method="POST">
             <h2><strong>REGISTRE-SE</strong></h2>
             <input class="inputImc" type="text" name="nome" placeholder="Nome" required>
@@ -21,5 +23,12 @@ include_once("funcoes.php");
             <input class="inputImc" type="password" name="senha" placeholder="Senha" required>
             <button class="btnCalcular" type="submit">Concluir</button>
         </form>
+        <?php if($verificar_login == true){echo "<p id= 'msg-success'> Login existente, tente outro! </p>";}?>
     </div>
 </div>
+<script>
+        setTimeout(function(){ 
+            var msg = document.getElementById("msg-success");
+            msg.parentNode.removeChild(msg);   
+        }, 4000);
+</script>

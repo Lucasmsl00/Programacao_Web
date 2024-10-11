@@ -128,6 +128,7 @@
 
         if( !$nome || !$email || !$telefone || !$login || !$senha){return;}
         $senha = criptografia($senha);
+        if (count(consultarLogin($login)) > 0 ){return;}
         $sql = "INSERT INTO `registro` (`nome`, `email`, `telefone`, `login`, `senha`) VALUES (:nome, :email, :telefone, :login, :senha)";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
@@ -180,4 +181,13 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function consultarLogin($login){
+        $sql = "SELECT `login` FROM `registro` WHERE `login` = '$login'";
+        $pdo = Database::conexao();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
     }
