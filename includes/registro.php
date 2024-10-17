@@ -1,14 +1,8 @@
 <?php
-$nome = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome'])) ? $_POST['nome'] : null;
-$email = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['email'])) ? $_POST['email'] : null;
-$telefone = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['telefone'])) ? $_POST['telefone'] : null;
-$login = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['login'])) ? $_POST['login'] : null;
-$senha = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['senha'])) ? $_POST['senha'] : null;
-
 include_once("configuracao/conexao.php");
 include_once("funcoes.php");
 
-$verificar_login = consultarLogin($login)
+
 ?>
 
 <div class="conteiner">
@@ -26,9 +20,3 @@ $verificar_login = consultarLogin($login)
         <?php if($verificar_login == true){echo "<p id= 'msg-success'> Login existente, tente outro! </p>";}?>
     </div>
 </div>
-<script>
-        setTimeout(function(){ 
-            var msg = document.getElementById("msg-success");
-            msg.parentNode.removeChild(msg);   
-        }, 4000);
-</script>

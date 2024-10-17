@@ -127,7 +127,6 @@
     function registrar($nome, $email, $telefone, $login, $senha){
 
         if( !$nome || !$email || !$telefone || !$login || !$senha){return;}
-        $senha = criptografia($senha);
         if (count(consultarLogin($login)) > 0 ){return;}
         $sql = "INSERT INTO `registro` (`nome`, `email`, `telefone`, `login`, `senha`) VALUES (:nome, :email, :telefone, :login, :senha)";
         $pdo = Database::conexao();
@@ -184,10 +183,36 @@
     }
 
     function consultarLogin($login){
-        $sql = "SELECT `login` FROM `registro` WHERE `login` = '$login'";
+        if(!$login){return;}
+        $sql = "SELECT `id`, `nome`, `login`, `senha` FROM `registro` WHERE `login` = '$login'";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $resultado;
+        if (count($resultado) == 0){return false;}
+        return $resultado[0];
+
+    }
+
+    function validarSenha($senhaDigitada, $senhaBd){
+        if(!$senhaDigitada || !$senhaBd){return false;}
+        if($senhaDigitada == $senhaBd){
+            return true;
+        }
+        return false;
+    }
+
+    function protegerTela(){
+        if(
+            !$_SESSION ||
+            !$_SESSION["usuario"]["status"] === 'logado'
+        ){
+            header("Location:".constant("URL_LOCAL_SITE_PAGINA_LOGIN"));
+        }
+    }
+
+    function registrarAcessoValido($usuarioCadastrado){
+        $_SESSION["usuario"]["nome"] =  $usuarioCadastrado["nome"];
+        $_SESSION["usuario"]["id"] = $usuarioCadastrado["id"];
+        $_SESSION["usuario"]["status"] = 'logado';
     }
