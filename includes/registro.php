@@ -17,6 +17,10 @@ include_once("funcoes.php");
             <input class="inputImc" type="password" name="senha" placeholder="Senha" required>
             <button class="btnCalcular" type="submit">Concluir</button>
         </form>
-        <?php if($verificar_login == true){echo "<p id= 'msg-success'> Login existente, tente outro! </p>";}?>
+        <?php
+            if ($verificar_login != null){ 
+                if($verificar_login == true){echo "<p id= 'msg-success'> Login existente, tente outro! </p>";}
+            }
+        ?>
     </div>
 </div>

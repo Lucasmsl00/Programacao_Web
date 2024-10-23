@@ -191,7 +191,7 @@
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($resultado) == 0){return false;}
         return $resultado[0];
-
+        var_dump($resultado[0]);die;
     }
 
     function validarSenha($senhaDigitada, $senhaBd){
@@ -215,4 +215,10 @@
         $_SESSION["usuario"]["nome"] =  $usuarioCadastrado["nome"];
         $_SESSION["usuario"]["id"] = $usuarioCadastrado["id"];
         $_SESSION["usuario"]["status"] = 'logado';
+    }
+
+
+    function limparSessao(){
+        unset($_SESSION["usuario"]);
+        header('Location:'.constant("URL_LOCAL_SITE_PAGINA_LOGIN"));
     }
