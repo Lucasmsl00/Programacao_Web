@@ -152,3 +152,18 @@ img{
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.mainCategoryCardTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.mainCategoryCardDescription {
+    font-size: 1rem;
+}
+
+.gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

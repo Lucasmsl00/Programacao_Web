@@ -18,6 +18,7 @@ $imc = calcularImc($peso, $altura, $nome, $email);
 $classificacao = classificarImc($imc);
 $confirmacao = verificarInput($nome, $email, $peso, $altura, $imc, $classificacao);
 $verificar_login = consultarLogin($login);
+$noticia = null;
 
 
 
@@ -34,7 +35,7 @@ if($paginaUrl === "principal"){
 }elseif($paginaUrl === "login"){
     $usuarioCadastrado = consultarLogin($login);
     if($usuarioCadastrado && validarSenha($senha, $usuarioCadastrado["senha"])){
-        registrarAcessoValido($usuarioCadastrado);}
+    registrarAcessoValido($usuarioCadastrado);}
     include_once("includes/login.php");
     include_once("includes/footer.php");
 }elseif($paginaUrl === "contato"){
@@ -46,15 +47,20 @@ if($paginaUrl === "principal"){
     include_once("includes/registro.php");
     include_once("includes/footer.php");
     registrar($nome, $email, $telefone, $login, $senha);
-}elseif($paginaUrl === "boxe"){
-    include_once("includes/boxe.php");
-    include_once("includes/footer.php");
 }elseif($paginaUrl === "noticia"){
     protegerTela();
     include_once("includes/noticia.php");
     include_once("includes/footer.php");
 }elseif($paginaUrl === "sair"){
     limparSessao();
+}elseif($paginaUrl === "detalhe"){
+    if($_GET && isset($_GET['id'])){
+        $idNoticia = $_GET['id'];
+    }else{
+        $idNoticia = 0;
+    }
+    $noticia = buscarNoticiaPorId($idNoticia);
+    include_once("includes/detalhe.php");
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";
 }

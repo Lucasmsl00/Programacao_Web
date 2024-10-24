@@ -222,3 +222,14 @@
         unset($_SESSION["usuario"]);
         header('Location:'.constant("URL_LOCAL_SITE_PAGINA_LOGIN"));
     }
+
+    function buscarNoticiaPorId($id){
+        if(!$id){return;}
+        $sql = "SELECT * FROM `noticias` WHERE `id` = :id";
+        $pdo = Database::conexao();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $result = $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0];
+    }
