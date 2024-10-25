@@ -153,17 +153,17 @@ img{
     margin-bottom: 50px;
 }
 
-.mainCategoryCardTitle {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.mainCategoryCardDescription {
-    font-size: 1rem;
-}
-
-.gridContainer {
+.div_noticias_relacionadas{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.div_grid{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    align-items: center;
     justify-content: center;
 }

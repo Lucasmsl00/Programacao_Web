@@ -233,3 +233,13 @@
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result[0];
     }
+
+
+    function procurarNoticiaPorLike(){
+        $sql = "SELECT * FROM `noticias` WHERE `descricao` LIKE '%luta%'";
+        $pdo = Database::conexao();
+        $stmt = $pdo->prepare($sql);
+        $result = $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
