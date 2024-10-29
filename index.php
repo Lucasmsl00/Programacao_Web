@@ -31,16 +31,13 @@ if($_GET && isset($_GET['pagina'])){
 include_once("includes/header.php");
 if($paginaUrl === "principal"){
     include_once("includes/principal.php");   
-    include_once("includes/footer.php");
 }elseif($paginaUrl === "login"){
     $usuarioCadastrado = consultarLogin($login);
     if($usuarioCadastrado && validarSenha($senha, $usuarioCadastrado["senha"])){
     registrarAcessoValido($usuarioCadastrado);}
     include_once("includes/login.php");
-    include_once("includes/footer.php");
 }elseif($paginaUrl === "contato"){
     include_once("includes/contato.php");
-    include_once("includes/footer.php");
     contatar($nome, $sobrenome, $email, $telefone, $mensagem);
 }elseif($paginaUrl === "registro"){
     protegerTela();
@@ -50,7 +47,6 @@ if($paginaUrl === "principal"){
 }elseif($paginaUrl === "noticia"){
     protegerTela();
     include_once("includes/noticia.php");
-    include_once("includes/footer.php");
 }elseif($paginaUrl === "sair"){
     limparSessao();
 }elseif($paginaUrl === "detalhe"){
@@ -64,6 +60,7 @@ if($paginaUrl === "principal"){
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";
 }
+include_once("includes/footer.php");
 
 
 
