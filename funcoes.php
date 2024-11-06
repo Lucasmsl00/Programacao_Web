@@ -235,8 +235,8 @@
     }
 
 
-    function procurarNoticiaPorLike(){
-        $sql = "SELECT * FROM `noticias` WHERE `descricao` LIKE '%luta%'";
+    function procurarNoticiaPorLike($categoria_esporte,$titulo){
+        $sql = "SELECT * FROM `noticias` WHERE `descricao` LIKE '%$categoria_esporte%' OR `titulo` LIKE '%$titulo%'";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
         $result = $stmt->execute();

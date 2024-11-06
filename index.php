@@ -1,7 +1,7 @@
 <?php
-include_once("includes/configuracao.php");
+include_once("configuracao.php");
 include_once("configuracao/conexao.php");
-include_once("includes/funcoes.php");
+include_once("funcoes.php");
 
 $nome = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome'])) ? $_POST['nome'] : null;
 $email = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['email'])) ? $_POST['email'] : null;
@@ -28,25 +28,25 @@ if($_GET && isset($_GET['pagina'])){
     $paginaUrl = null;
 }
 
-include_once("includes/header.php");
+include_once("views/header_view.php");
 if($paginaUrl === "principal"){
-    include_once("includes/principal.php");   
+    include_once("views/principal_view.php");   
 }elseif($paginaUrl === "login"){
     $usuarioCadastrado = consultarLogin($login);
     if($usuarioCadastrado && validarSenha($senha, $usuarioCadastrado["senha"])){
     registrarAcessoValido($usuarioCadastrado);}
-    include_once("includes/login.php");
+    include_once("views/login_view.php");
 }elseif($paginaUrl === "contato"){
-    include_once("includes/contato.php");
+    include_once("views/contato_view.php");
     contatar($nome, $sobrenome, $email, $telefone, $mensagem);
 }elseif($paginaUrl === "registro"){
     protegerTela();
-    include_once("includes/registro.php");
-    include_once("includes/footer.php");
+    include_once("views/registro_view.php");
+    include_once("views/footer_view.php");
     registrar($nome, $email, $telefone, $login, $senha);
 }elseif($paginaUrl === "noticia"){
     protegerTela();
-    include_once("includes/noticia.php");
+    include_once("views/noticia_view.php");
 }elseif($paginaUrl === "sair"){
     limparSessao();
 }elseif($paginaUrl === "detalhe"){
@@ -56,11 +56,11 @@ if($paginaUrl === "principal"){
         $idNoticia = 0;
     }
     $noticia = buscarNoticiaPorId($idNoticia);
-    include_once("includes/detalhe.php");
+    include_once("views/detalhe_view.php");
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";
 }
-include_once("includes/footer.php");
+include_once("views/footer_view.php");
 
 
 

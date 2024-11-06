@@ -16,7 +16,7 @@
         <div><a href="<?= constant('URL_LOCAL_SITE_PAGINA').'principal'?>" class="text_white">InfoSports</a></div>
         <nav>
             <?php
-                include_once("menu.php")
+                include_once("menu_view.php")
             ?>
         </nav>
 </header>
