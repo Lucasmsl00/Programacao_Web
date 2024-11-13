@@ -4,6 +4,7 @@ include_once("configuracao/conexao.php");
 include_once("funcoes.php");
 
 $nome = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome'])) ? $_POST['nome'] : null;
+$nome_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
 $email = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['email'])) ? $_POST['email'] : null;
 $peso = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['peso'])) ? $_POST['peso'] : null;
 $altura = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['altura'])) ? $_POST['altura'] : null;
@@ -14,11 +15,15 @@ $imc = 0;
 $sobrenome =($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['sobrenome'])) ? $_POST['sobrenome'] : null;
 $mensagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['mensagem'])) ? $_POST['mensagem'] : null;
 
+
 $imc = calcularImc($peso, $altura, $nome, $email);
 $classificacao = classificarImc($imc);
 $confirmacao = verificarInput($nome, $email, $peso, $altura, $imc, $classificacao);
 $verificar_login = consultarLogin($login);
 $noticia = null;
+$categorias = [];
+$noticiasPorCategoria = [];
+
 
 
 
@@ -46,7 +51,14 @@ if($paginaUrl === "principal"){
     registrar($nome, $email, $telefone, $login, $senha);
 }elseif($paginaUrl === "noticia"){
     protegerTela();
+    $categorias = listarCategorias();
     include_once("views/noticia_view.php");
+}elseif($paginaUrl === "categoria"){
+    protegerTela();
+    include_once("views/categoria_view.php");
+    if(!verificarCategoriaDuplicada($nome_categoria)){
+        cadastrarCategoria($nome_categoria);
+    }
 }elseif($paginaUrl === "sair"){
     limparSessao();
 }elseif($paginaUrl === "detalhe"){
@@ -56,6 +68,7 @@ if($paginaUrl === "principal"){
         $idNoticia = 0;
     }
     $noticia = buscarNoticiaPorId($idNoticia);
+    $noticiasPorCategoria = listarNoticiasPorCategoria($noticia['categoria_id']);
     include_once("views/detalhe_view.php");
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";

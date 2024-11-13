@@ -7,7 +7,7 @@ $caminhoArquivo = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['caminh
 
 include_once("configuracao/conexao.php");
 include_once("funcoes.php");
-criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $caminhoArquivo);
+
 ?>
 
 <div class="conteiner">
@@ -18,8 +18,18 @@ criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $caminhoArquivo)
             <textarea class="input-text-area" name="descricaoCurta" id="" placeholder="Descrição curta. Para pagina principal" required></textarea>
             <textarea class="input-text-area" name="descricao" id="" placeholder="Descrição completa" required></textarea>
             <input class="inputImc" type="text" name="caminhoImg" placeholder="Caminho da imagem" required>
-            <input class="inputImc" type="text" name="caminhoArquivo" placeholder="Caminho para o arquivo" required>
+            <div class="input-box">
+                            <select name="nome_categoria" class="name">
+                                <?php foreach ($categorias as $itemCategoria):?>
+                                    <option value="<?=$itemCategoria['id']?>"><?=$itemCategoria['nome_categoria']?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
             <button class="btnCalcular" type="submit">Enviar notícia</button>
         </form>
+        <?php
+        $id_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
+        criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $id_categoria);
+        ?>
     </div>
 </div>

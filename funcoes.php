@@ -160,16 +160,16 @@
         return sha1($senha);
     }
 
-    function criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $caminhoArquivo){
-        if(!$titulo || !$descricaoCurta || !$descricao || !$caminhoImg || !$caminhoArquivo){return;}
-        $sql = "INSERT INTO `noticias` (`titulo`, `descricaoCurta`, `descricao`, `caminhoImg`, `caminhoArquivo`) VALUES (:titulo, :descricaoCurta, :descricao, :caminhoImg, :caminhoArquivo)";
+    function criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $id_categoria){
+        if(!$titulo || !$descricaoCurta || !$descricao || !$caminhoImg || !$id_categoria){return;}
+        $sql = "INSERT INTO `noticias` (`titulo`, `descricaoCurta`, `descricao`, `caminhoImg`, `id_categoria`) VALUES (:titulo, :descricaoCurta, :descricao, :caminhoImg, :id_categoria)";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':descricaoCurta', $descricaoCurta);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':caminhoImg', $caminhoImg);
-        $stmt->bindParam(':caminhoArquivo', $caminhoArquivo);
+        $stmt->bindParam(':id_categoria', $id_categoria);
         $result = $stmt->execute();
         return ($result)?true:false;
     }
@@ -234,12 +234,51 @@
         return $result[0];
     }
 
+    function cadastrarCategoria($nome_categoria){
 
-    function procurarNoticiaPorLike($categoria_esporte,$titulo){
-        $sql = "SELECT * FROM `noticias` WHERE `descricao` LIKE '%$categoria_esporte%' OR `titulo` LIKE '%$titulo%'";
+        if( !$nome_categoria){return;}
+        $sql = "INSERT INTO `categoria` (`nome_categoria`) VALUES (:nome_categoria)";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':nome_categoria', $nome_categoria);
         $result = $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return ($result)?true:false;
+    }
+    
+    function verificarCategoriaDuplicada($termo){
+
+        if( !$termo){return;}
+        $sql = "SELECT * FROM `categoria` WHERE `nome_categoria` = :termo";
+        $pdo = Database::conexao();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':termo', $termo);
+        $result = $stmt->execute();
+        return ($result)?true:false;
+    }
+
+    function listarCategorias(){
+        $pdo = Database::conexao();
+        $sql = "SELECT * FROM categoria";
+        $stmt = $pdo->prepare($sql);
+        $list = $stmt->execute();
+        $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $list;
+    }
+
+    function listarNoticiasPorCategoria($idCategoria){
+        $pdo = Database::conexao();
+        $sql = "SELECT * FROM noticias WHERE `id_categoria` = $idCategoria LIMIT 3;";
+        $stmt = $pdo->prepare($sql);
+        $list = $stmt->execute();
+        $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $list;
+    }
+
+    function buscarIdCategoria($nome_categoria){
+        $pdo = Database::conexao();
+        $sql = "SELECT `id` FROM categoria WHERE `nome_categoria` = '$nome_categoria'";
+        $stmt = $pdo->prepare($sql);
+        $list = $stmt->execute();
+        $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $list[0];
     }
