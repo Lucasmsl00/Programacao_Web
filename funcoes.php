@@ -160,15 +160,15 @@
         return sha1($senha);
     }
 
-    function criarNoticia($titulo, $descricaoCurta, $descricao, $caminhoImg, $id_categoria){
-        if(!$titulo || !$descricaoCurta || !$descricao || !$caminhoImg || !$id_categoria){return;}
-        $sql = "INSERT INTO `noticias` (`titulo`, `descricaoCurta`, `descricao`, `caminhoImg`, `id_categoria`) VALUES (:titulo, :descricaoCurta, :descricao, :caminhoImg, :id_categoria)";
+    function criarNoticia($titulo_noticia, $descricaoCurta, $descricao, $imagem, $id_categoria){
+        if(!$titulo_noticia || !$descricaoCurta || !$descricao || !$imagem || !$id_categoria){return;}
+        $sql = "INSERT INTO `noticias` (`titulo`, `descricaoCurta`, `descricao`, `imagem`, `id_categoria`) VALUES (:titulo_noticia, :descricaoCurta, :descricao, :imagem, :id_categoria)";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':titulo', $titulo);
+        $stmt->bindParam(':titulo_noticia', $titulo_noticia);
         $stmt->bindParam(':descricaoCurta', $descricaoCurta);
         $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':caminhoImg', $caminhoImg);
+        $stmt->bindParam(':imagem', $imagem);
         $stmt->bindParam(':id_categoria', $id_categoria);
         $result = $stmt->execute();
         return ($result)?true:false;
@@ -282,3 +282,62 @@
         $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $list[0];
     }
+
+
+    function gerarNumerosRandomicos(){
+        return date('Y').date('m').date('d').date("h").date(':i').'-'.date('sa').rand();
+      }
+    
+      function upload($imagem){
+        if(!@$_FILES["fileToUpload"]){return;}
+    
+        $target_dir = "assets/uploads/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])){
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
+    
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+    
+        // Check file size
+        if ($_FILES["fileToUpload"]["size"] > 900000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+    
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+    
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                // echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                return $_FILES["fileToUpload"]["name"];
+            } else {
+                // echo "Sorry, there was an error uploading your file.";
+                return false;
+            }
+        }
+      }

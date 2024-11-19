@@ -14,6 +14,10 @@ $login = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['login'])) ? $_P
 $imc = 0;
 $sobrenome =($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['sobrenome'])) ? $_POST['sobrenome'] : null;
 $mensagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['mensagem'])) ? $_POST['mensagem'] : null;
+$titulo_noticia = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['titulo_noticia'])) ? $_POST['titulo_noticia'] : null;
+$descricaoCurta = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['descricaoCurta'])) ? $_POST['descricaoCurta'] : null;
+$descricao = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['descricao'])) ? $_POST['descricao'] : null;
+$imagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['fileToUpload'])) ? $_POST['fileToUpload'] : null;
 
 
 $imc = calcularImc($peso, $altura, $nome, $email);
@@ -36,23 +40,32 @@ if($_GET && isset($_GET['pagina'])){
 include_once("views/header_view.php");
 if($paginaUrl === "principal"){
     include_once("views/principal_view.php");   
+
 }elseif($paginaUrl === "login"){
     $usuarioCadastrado = consultarLogin($login);
     if($usuarioCadastrado && validarSenha($senha, $usuarioCadastrado["senha"])){
     registrarAcessoValido($usuarioCadastrado);}
     include_once("views/login_view.php");
+
 }elseif($paginaUrl === "contato"){
     include_once("views/contato_view.php");
     contatar($nome, $sobrenome, $email, $telefone, $mensagem);
+
 }elseif($paginaUrl === "registro"){
     protegerTela();
     include_once("views/registro_view.php");
     include_once("views/footer_view.php");
     registrar($nome, $email, $telefone, $login, $senha);
+
 }elseif($paginaUrl === "noticia"){
     protegerTela();
     $categorias = listarCategorias();
+    $id_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
+    $nomedaImagem = upload($imagem);
+    // var_dump($titulo_noticia);die;
+    criarNoticia($titulo_noticia, $descricaoCurta, $descricao, $nomedaImagem, $id_categoria);
     include_once("views/noticia_view.php");
+
 }elseif($paginaUrl === "categoria"){
     protegerTela();
     include_once("views/categoria_view.php");
@@ -61,6 +74,7 @@ if($paginaUrl === "principal"){
     }
 }elseif($paginaUrl === "sair"){
     limparSessao();
+
 }elseif($paginaUrl === "detalhe"){
     if($_GET && isset($_GET['id'])){
         $idNoticia = $_GET['id'];
@@ -70,8 +84,10 @@ if($paginaUrl === "principal"){
     $noticia = buscarNoticiaPorId($idNoticia);
     $noticiasPorCategoria = listarNoticiasPorCategoria($noticia['categoria_id']);
     include_once("views/detalhe_view.php");
+
 }else{
     echo "ERROR 404, PÁGINA NÃO EXISTE!";
+
 }
 include_once("views/footer_view.php");
 

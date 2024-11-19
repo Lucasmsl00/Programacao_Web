@@ -15,7 +15,7 @@
 
                 <div class="item1">
                         <a href="<?= constant('URL_LOCAL_SITE_DETALHE').$noticia['id']?>">
-                        <img src= <?= $noticia["caminhoImg"] ? $noticia["caminhoImg"] : "" ?>>
+                        <img src= <?= $noticia["imagem"] ? $noticia["imagem"] : "" ?>>
                         <br><br><h4><?= $noticia["titulo"] ? $noticia["titulo"] : ""?></h4><br>
                         <p> <?= reduzirStr(($noticia["descricaoCurta"]),100)?></p>
                     </a>
