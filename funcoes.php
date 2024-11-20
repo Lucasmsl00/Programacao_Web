@@ -247,12 +247,13 @@
     
     function verificarCategoriaDuplicada($termo){
 
-        if( !$termo){return;}
+        if(!$termo){return;}
         $sql = "SELECT * FROM `categoria` WHERE `nome_categoria` = :termo";
         $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':termo', $termo);
         $result = $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return ($result)?true:false;
     }
 
@@ -267,7 +268,7 @@
 
     function listarNoticiasPorCategoria($idCategoria){
         $pdo = Database::conexao();
-        $sql = "SELECT * FROM noticias WHERE `id_categoria` = $idCategoria LIMIT 3;";
+        $sql = "SELECT * FROM noticias WHERE `id_categoria` = $idCategoria LIMIT 4;";
         $stmt = $pdo->prepare($sql);
         $list = $stmt->execute();
         $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
