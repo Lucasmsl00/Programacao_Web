@@ -15,11 +15,7 @@
 
                 <div class="item1">
                         <a href="<?= constant('URL_LOCAL_SITE_DETALHE').$noticia['id']?>">
-<<<<<<< HEAD
                         <img src= ".\assets\uploads\<?= $noticia['imagem']?>">
-=======
-                        <img src=  .\assets\uploads\<?=$noticia["imagem"]?>>
->>>>>>> 4cdc1c420811ac9e474f1106434247ce0d77585a
                         <br><br><h4><?= $noticia["titulo"] ? $noticia["titulo"] : ""?></h4><br>
                         <p> <?= reduzirStr(($noticia["descricaoCurta"]),100)?></p>
                     </a>
