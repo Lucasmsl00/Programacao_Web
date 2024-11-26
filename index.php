@@ -53,16 +53,13 @@ if($paginaUrl === "principal"){
 
 }elseif($paginaUrl === "registro"){
     protegerTela();
-    include_once("views/registro_view.php");
-    include_once("views/footer_view.php");
-    registrar($nome, $email, $telefone, $login, $senha);
-
+    include_once("controller/registro_controller.php");
+    
 }elseif($paginaUrl === "noticia"){
     protegerTela();
     $categorias = listarCategorias();
     $id_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
     $nomedaImagem = upload($imagem);
-    // var_dump($titulo_noticia);die;
     criarNoticia($titulo_noticia, $descricaoCurta, $descricao, $nomedaImagem, $id_categoria);
     include_once("views/noticia_view.php");
 
