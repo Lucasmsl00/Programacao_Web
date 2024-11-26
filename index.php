@@ -11,7 +11,6 @@ $altura = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['altura'])) ? $
 $telefone = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['telefone'])) ? $_POST['telefone'] : null;
 $login = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['login'])) ? $_POST['login'] : null;
 @$senha = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty(criptografia($_POST['senha']))) ? criptografia($_POST['senha']) : null;
-$imc = 0;
 $sobrenome =($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['sobrenome'])) ? $_POST['sobrenome'] : null;
 $mensagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['mensagem'])) ? $_POST['mensagem'] : null;
 $titulo_noticia = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['titulo_noticia'])) ? $_POST['titulo_noticia'] : null;
@@ -20,6 +19,7 @@ $descricao = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['descricao']
 $imagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['fileToUpload'])) ? $_POST['fileToUpload'] : null;
 
 
+$imc = 0;
 $imc = calcularImc($peso, $altura, $nome, $email);
 $classificacao = classificarImc($imc);
 $confirmacao = verificarInput($nome, $email, $peso, $altura, $imc, $classificacao);
@@ -66,9 +66,7 @@ if($paginaUrl === "principal"){
 }elseif($paginaUrl === "categoria"){
     protegerTela();
     include_once("views/categoria_view.php");
-    if(!verificarCategoriaDuplicada($nome_categoria)){
-        cadastrarCategoria($nome_categoria);
-    }
+
 }elseif($paginaUrl === "sair"){
     limparSessao();
 
@@ -79,7 +77,7 @@ if($paginaUrl === "principal"){
         $idNoticia = 0;
     }
     $noticia = buscarNoticiaPorId($idNoticia);
-    $noticiasPorCategoria = listarNoticiasPorCategoria($noticia['categoria_id']);
+    $noticiasPorCategoria = listarNoticiasPorCategoria($noticia['id_categoria']);
     include_once("views/detalhe_view.php");
 
 }else{
