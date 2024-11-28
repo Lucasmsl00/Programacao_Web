@@ -13,7 +13,7 @@ include_once("funcoes.php");
         <input class="inputImc" type="password" name="senha" id="senha" placeholder="Senha" required>
         <button class="btnCalcular" type="submit">Entrar</button>
         <?php
-            if($verificar_login == null){
+            if($usuarioCadastrado == null){
                 echo ('<p id= "msg-success"> Login ou senha inválidos </p>');
             }
         ?>

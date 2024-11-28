@@ -2,6 +2,7 @@
 include_once("configuracao.php");
 include_once("configuracao/conexao.php");
 include_once("funcoes.php");
+include_once("models/acesso_model.php");
 
 $nome = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome'])) ? $_POST['nome'] : null;
 $nome_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
@@ -22,8 +23,8 @@ $imagem = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['fileToUpload']
 $imc = 0;
 $imc = calcularImc($peso, $altura, $nome, $email);
 $classificacao = classificarImc($imc);
+
 $confirmacao = verificarInput($nome, $email, $peso, $altura, $imc, $classificacao);
-$verificar_login = consultarLogin($login);
 $noticia = null;
 $categorias = [];
 $noticiasPorCategoria = [];
@@ -41,22 +42,25 @@ include_once("views/header_view.php");
 if($paginaUrl === "principal"){
     include_once("views/principal_view.php");   
 
+}elseif($paginaUrl === "registro"){
+    acesso::protegerTela();
+    include_once("models/registro_model.php");
+    $usuarioCadastrado = registro::consultarLogin($login);;
+    include_once("controller/registro_controller.php");
+
 }elseif($paginaUrl === "login"){
-    $usuarioCadastrado = consultarLogin($login);
-    if($usuarioCadastrado && validarSenha($senha, $usuarioCadastrado["senha"])){
-    registrarAcessoValido($usuarioCadastrado);}
+    include_once("models/registro_model.php");
+    $usuarioCadastrado = registro::consultarLogin($login);;
+    if($usuarioCadastrado && acesso::validarSenha($senha, $usuarioCadastrado["senha"])){
+    acesso::registrarAcessoValido($usuarioCadastrado);}
     include_once("views/login_view.php");
 
 }elseif($paginaUrl === "contato"){
     include_once("views/contato_view.php");
     contatar($nome, $sobrenome, $email, $telefone, $mensagem);
 
-}elseif($paginaUrl === "registro"){
-    protegerTela();
-    include_once("controller/registro_controller.php");
-    
 }elseif($paginaUrl === "noticia"){
-    protegerTela();
+    acesso::protegerTela();
     $categorias = listarCategorias();
     $id_categoria = ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome_categoria'])) ? $_POST['nome_categoria'] : null;
     $nomedaImagem = upload($imagem);
@@ -64,11 +68,11 @@ if($paginaUrl === "principal"){
     include_once("views/noticia_view.php");
 
 }elseif($paginaUrl === "categoria"){
-    protegerTela();
+    acesso::protegerTela();
     include_once("views/categoria_view.php");
 
 }elseif($paginaUrl === "sair"){
-    limparSessao();
+    acesso::limparSessao();
 
 }elseif($paginaUrl === "detalhe"){
     if($_GET && isset($_GET['id'])){
